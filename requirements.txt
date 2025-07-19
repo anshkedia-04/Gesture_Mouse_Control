@@ -1,4 +1,4 @@
 opencv-python
-mediapipe
+git+https://github.com/google/mediapipe.git
 pyautogui
 streamlit
