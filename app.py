@@ -1,8 +1,8 @@
 import streamlit as st
 from gesture_control import start_control, stop_control
 
-st.set_page_config(page_title="Gesture Mouse Control", layout="centered")
-st.title("🖐️ Gesture-Based Mouse Control")
+st.set_page_config(page_title="VisionMouse : Gesture Mouse Control", layout="centered")
+st.title("🖐️ VisionMouse : Gesture-Based Mouse Control")
 st.markdown("Control your mouse with your hand gestures.")
 
 if "gesture_active" not in st.session_state:

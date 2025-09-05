@@ -1,3 +1,4 @@
+import streamlit as st
 import cv2
 import mediapipe as mp
 import pyautogui
@@ -7,9 +8,11 @@ from collections import deque
 
 running = False  # Flag to control loop
 thread = None    # To store thread reference
+stframe = None   # Streamlit placeholder for video frames
 
+# Gesture loop now updates Streamlit image instead of cv2 window
 def gesture_loop():
-    global running
+    global running, stframe
     mp_hands = mp.solutions.hands
     hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
     mp_draw = mp.solutions.drawing_utils
@@ -23,6 +26,8 @@ def gesture_loop():
 
     last_click_time = 0
     click_delay = 0.5
+
+    stframe = st.empty()  # placeholder for video
 
     while running:
         success, img = cam.read()
@@ -65,14 +70,13 @@ def gesture_loop():
                         last_click_time = current_time
                         cv2.circle(img, index_finger, 10, (0, 255, 0), cv2.FILLED)
 
-        cv2.imshow("Gesture Mouse Control", img)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            running = False
-            break
+        # Convert BGR to RGB for Streamlit
+        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        stframe.image(img_rgb, channels="RGB")
 
     cam.release()
-    cv2.destroyAllWindows()
 
+# Start and stop functions
 def start_control():
     global running, thread
     if not running:
