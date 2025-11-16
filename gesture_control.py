@@ -5,6 +5,8 @@ import pyautogui
 import time
 import threading
 from collections import deque
+from cvzone.HandTrackingModule import HandDetector
+
 
 running = False  # Flag to control loop
 thread = None    # To store thread reference
