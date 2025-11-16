@@ -1,5 +1,5 @@
-streamlit==1.28.0
-opencv-python-headless==4.10.0.84
-cvzone==1.6.1
-numpy
+streamlit
+opencv-python-headless
+cvzone
 pyautogui
+numpy
